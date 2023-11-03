@@ -57,5 +57,8 @@ public class HomePage {
 
         String successMes = page.querySelector(".alert-success").textContent();
         System.out.println(successMes);
+
+        assertThat(successMes)
+
     }
 }
