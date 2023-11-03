@@ -9,6 +9,8 @@ import com.microsoft.playwright.options.LoadState;
 
 import java.util.List;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class HomePage {
     private final Page page;
     private final Locator search;
@@ -58,7 +60,6 @@ public class HomePage {
         String successMes = page.querySelector(".alert-success").textContent();
         System.out.println(successMes);
 
-        assertThat(successMes)
-
+        assertThat(page.locator(".alert-success")).containsText("Success: You have modified your shopping cart!");
     }
 }
