@@ -14,11 +14,13 @@ public class TestPlay {
             BrowserContext context = browser.newContext();
             Page page = context.newPage();
 
-            HomePage homePage = new HomePage(page);
-            homePage.navigate("https://opencart.abstracta.us/");
-            homePage.perfPruchaseInCart();
-            homePage.assertPurchase();
 
-        }
+
+            HomePage homePage = new HomePage(page);
+
+            homePage.navigate("https://www.saucedemo.com/");
+            homePage.perfLoginFail();
+
+    }
     }
 }

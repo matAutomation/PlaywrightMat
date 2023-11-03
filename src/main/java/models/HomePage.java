@@ -6,10 +6,9 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 import java.util.List;
-
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class HomePage {
     private final Page page;
@@ -23,6 +22,32 @@ public class HomePage {
 
     public void navigate(String url){
         page.navigate(url);
+    }
+
+    //Crear un metodo para abstraer el login
+
+    public void setLogin(String user, String pass){
+        page.querySelector("#user-name").fill(user);
+        page.querySelector("#password").fill(pass);
+
+    }
+
+    public void perfLogin() throws InterruptedException {
+        setLogin("standard_user", "secret_sauce");
+        page.querySelector("#login-button").click();
+
+        assertThat(page.getByText("Sauce Labs Backpack")).containsText("Sauce Labs Backpack");
+
+    }
+
+    public void perfLoginFail(){
+
+        setLogin("standard_user", "secret_sauce");;
+        page.querySelector("#login-button").click();
+        //page.querySelector(".error-message-container");
+
+        assertThat(page.locator(".error-message-container")).containsText("Epic sadface: Username and password do not match any user in this service");
+
     }
 
     public void perfPruchaseInCart(){
